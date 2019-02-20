@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">vocabtrainer</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="hint_word">Word&#8230;</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Dict not saved because it is empty.</string>
 </resources>
