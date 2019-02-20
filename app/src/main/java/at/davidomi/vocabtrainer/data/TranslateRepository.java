@@ -52,7 +52,7 @@ public class TranslateRepository {
             call.enqueue(new Callback<WordResponse>() {
                 @Override
                 public void onResponse(Call<WordResponse> call, Response<WordResponse> response) {
-                    word.setOutput(response.body().text.get(0));
+                    word.setOutput(response.body().text);
                     new insertWordAsyncTask(mWordDao).execute(word);
                 }
 

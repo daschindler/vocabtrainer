@@ -6,6 +6,9 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "word_table", foreignKeys = @ForeignKey(entity = Dict.class,
@@ -19,7 +22,7 @@ public class Word {
     private String mInput;
 
     @ColumnInfo (name = "output")
-    private String mOutput;
+    private List<String> mOutput;
 
     @ColumnInfo(name = "dict_type")
     private String mDictyType;
@@ -29,7 +32,7 @@ public class Word {
 
     public Word(@NonNull String input, @NonNull String dictType) {
         this.mInput = input;
-        this.mOutput = "no_data";
+        this.mOutput = new ArrayList<>();
         this.mDictyType = dictType;
 
     }
@@ -39,7 +42,7 @@ public class Word {
         return this.mInput;
     }
 
-    public String getOutput() {
+    public List<String> getOutput() {
         return this.mOutput;
     }
 
@@ -51,7 +54,7 @@ public class Word {
         this.mInput = mInput;
     }
 
-    public void setOutput(String mOutput) {
+    public void setOutput(List<String> mOutput) {
         this.mOutput = mOutput;
     }
 

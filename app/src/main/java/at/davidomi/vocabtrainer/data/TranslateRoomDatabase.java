@@ -3,14 +3,17 @@ package at.davidomi.vocabtrainer.data;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
+import at.davidomi.vocabtrainer.Converters;
 import at.davidomi.vocabtrainer.dao.DictDao;
 import at.davidomi.vocabtrainer.dao.WordDao;
 import at.davidomi.vocabtrainer.entity.Dict;
 import at.davidomi.vocabtrainer.entity.Word;
 
 @Database(entities = {Dict.class, Word.class}, version = 1)
+@TypeConverters({Converters.class})
 public abstract class TranslateRoomDatabase extends RoomDatabase {
 
     public abstract DictDao dictDao();

@@ -53,8 +53,11 @@ public class WordsActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Word word) {
                 if (word != null) {
-                    Toast.makeText(getApplicationContext(), word.getOutput(), Toast.LENGTH_LONG).show();
-                    Log.e("getWord()", word.getOutput());
+                    if (word.getOutput().size()>0) {
+                        Toast.makeText(getApplicationContext(), word.getOutput().get(0), Toast.LENGTH_LONG).show();
+                        Log.e("getWord()", word.getOutput().get(0));
+                    }
+
                 }
             }
         });
