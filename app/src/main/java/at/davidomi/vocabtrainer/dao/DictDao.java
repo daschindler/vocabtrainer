@@ -20,4 +20,8 @@ public interface DictDao {
 
     @Query("Select * from dict_table where type=:type")
     Dict getDict(String type);
+
+    @Query("delete from dict_table")
+    void deleteAll();
+
 }

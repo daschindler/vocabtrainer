@@ -8,6 +8,7 @@ import java.util.List;
 
 import at.davidomi.vocabtrainer.data.TranslateRepository;
 import at.davidomi.vocabtrainer.entity.Dict;
+import at.davidomi.vocabtrainer.entity.Languages;
 
 
 public class DictViewModel extends AndroidViewModel {
@@ -28,5 +29,17 @@ public class DictViewModel extends AndroidViewModel {
 
     public void insert(Dict dict) {
         mRepository.insertDict(dict);
+    }
+
+    public void LoadLanguagesFromAPI() {
+        mRepository.InsertLanguagesFromAPI();
+    }
+
+    public LiveData<Languages> getLanguages() {
+        return mRepository.getLanguages();
+    }
+
+    public LiveData<Integer> getRowCountLanguagesTable() {
+        return mRepository.getRowCountLanguagesTable();
     }
 }

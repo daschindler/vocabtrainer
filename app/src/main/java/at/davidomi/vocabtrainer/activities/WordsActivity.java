@@ -43,8 +43,8 @@ public class WordsActivity extends AppCompatActivity {
         mWordViewModel = ViewModelProviders.of(this, new WordViewModelFactory(this.getApplication(), dictType))
                 .get(WordViewModel.class);
 
-        //mWordViewModel.insert(new Word("hallo", dictType));
-        //mWordViewModel.insert(new Word("lul", dictType));
+        //mWordViewModel.insertWord(new Word("hallo", dictType));
+        //mWordViewModel.insertWord(new Word("lul", dictType));
 
         mWordViewModel.deleteAllWords();
 

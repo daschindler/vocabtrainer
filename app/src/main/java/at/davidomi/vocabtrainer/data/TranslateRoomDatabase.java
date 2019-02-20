@@ -8,16 +8,19 @@ import android.content.Context;
 
 import at.davidomi.vocabtrainer.Converters;
 import at.davidomi.vocabtrainer.dao.DictDao;
+import at.davidomi.vocabtrainer.dao.LanguageDao;
 import at.davidomi.vocabtrainer.dao.WordDao;
 import at.davidomi.vocabtrainer.entity.Dict;
+import at.davidomi.vocabtrainer.entity.Languages;
 import at.davidomi.vocabtrainer.entity.Word;
 
-@Database(entities = {Dict.class, Word.class}, version = 1)
+@Database(entities = {Dict.class, Word.class, Languages.class}, version = 1)
 @TypeConverters({Converters.class})
 public abstract class TranslateRoomDatabase extends RoomDatabase {
 
     public abstract DictDao dictDao();
     public abstract WordDao wordDao();
+    public abstract LanguageDao languageDao();
 
     private static volatile TranslateRoomDatabase INSTANCE;
 

@@ -20,6 +20,7 @@ import java.util.List;
 import at.davidomi.vocabtrainer.R;
 import at.davidomi.vocabtrainer.adapter.DictListAdapter;
 import at.davidomi.vocabtrainer.entity.Dict;
+import at.davidomi.vocabtrainer.entity.Languages;
 import at.davidomi.vocabtrainer.viewmodel.DictViewModel;
 
 
@@ -39,8 +40,16 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NewDictActivity.class);
-                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+                //Intent intent = new Intent(MainActivity.this, NewDictActivity.class);
+                //startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+                mDictViewModel.getLanguages().observe(MainActivity.this, new Observer<Languages>() {
+                    @Override
+                    public void onChanged(@Nullable Languages languages) {
+                        if (languages != null) {
+                            Toast.makeText(getApplicationContext(), languages.getSupportedLanguages().toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
             }
         });
 
@@ -51,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
         mDictViewModel = ViewModelProviders.of(this).get(DictViewModel.class);
 
+        mDictViewModel.getRowCountLanguagesTable().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer integer) {
+                if (integer == 0) {
+                    mDictViewModel.LoadLanguagesFromAPI();
+                }
+            }
+        });
+
         mDictViewModel.getAllDicts().observe(this, new Observer<List<Dict>>() {
             @Override
             public void onChanged(@Nullable final List<Dict> dicts) {
@@ -58,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setDicts(dicts);
             }
         });
+
+
 
     }
 

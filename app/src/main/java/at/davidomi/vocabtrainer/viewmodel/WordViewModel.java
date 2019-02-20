@@ -7,6 +7,7 @@ import android.arch.lifecycle.LiveData;
 import java.util.List;
 
 import at.davidomi.vocabtrainer.data.TranslateRepository;
+import at.davidomi.vocabtrainer.entity.Languages;
 import at.davidomi.vocabtrainer.entity.Word;
 
 
@@ -35,6 +36,6 @@ public class WordViewModel extends AndroidViewModel {
     }
 
     public void insert(Word word) {
-        mRepository.insert(word);
+        mRepository.insertWord(word);
     }
 }
