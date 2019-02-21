@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(@Nullable Languages languages) {
                         if (languages != null) {
-                            Toast.makeText(getApplicationContext(), languages.getSupportedLanguages().toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), languages.getSupportedLanguageCodes().toString(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });

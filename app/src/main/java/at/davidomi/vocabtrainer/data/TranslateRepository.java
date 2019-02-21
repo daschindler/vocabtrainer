@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
 import at.davidomi.vocabtrainer.api.APIClient;
 import at.davidomi.vocabtrainer.api.APIService;
@@ -148,6 +148,23 @@ public class TranslateRepository {
         @Override
         protected Void doInBackground(final Languages... params) {
             Languages languages = params[0];
+            addSupportedLanguageCodes(languages);
+            extractFullNames(languages);
+
+            mAsyncTaskDao.insert(languages);
+            return null;
+        }
+
+        private void extractFullNames(Languages languages) {
+            for (int i = 0; i < languages.getSupportedLanguageCodes().size(); i++) {
+                Locale loc = new Locale(languages.getSupportedLanguageCodes().get(i));
+                String fullName = loc.getDisplayLanguage(loc);
+                fullName = fullName.substring(0, 1).toUpperCase() + fullName.substring(1);
+                languages.getSupportedLanguages().add(fullName);
+            }
+        }
+
+        private void addSupportedLanguageCodes(Languages languages) {
             List<String> splitLanguages = new ArrayList<>();
 
             for (int i = 0; i < languages.getDirections().size(); i++) {
@@ -155,10 +172,7 @@ public class TranslateRepository {
                 splitLanguages.add(languages.getDirections().get(i).split("-")[1]);
             }
 
-            languages.setSupportedLanguages(new ArrayList<String>(new LinkedHashSet<String>(splitLanguages)));
-
-            mAsyncTaskDao.insert(languages);
-            return null;
+            languages.setSupportedLanguageCodes(new ArrayList<String>(new LinkedHashSet<String>(splitLanguages)));
         }
     }
 
